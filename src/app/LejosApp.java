@@ -31,6 +31,6 @@ public class LejosApp {
     	thread1.setDaemon(true);
     	thread1.start();
     	
-    	
+        Button.waitForAnyPress();
     }
 }

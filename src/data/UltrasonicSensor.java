@@ -10,16 +10,22 @@ import lejos.utility.Delay;
 public class UltrasonicSensor implements Runnable {
 	
 	private DataExchange DEObj = new DataExchange();
-	private static EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S3);
+	private static EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S4);
 	
 	public UltrasonicSensor(DataExchange DE) {
 		DEObj = DE;
 	}
 	
 	public void run() {
-		if (getDistance() < 7) {
-			DEObj.setObstacleDetected(true);
+		while (true) {
+			System.out.println(getDistance());
+			if (getDistance() < 7) {
+				DEObj.setObstacleDetected(true);
+			} else {
+				DEObj.setObstacleDetected(false);
+			}
 		}
+
 	}
 	
 	public int getDistance() {

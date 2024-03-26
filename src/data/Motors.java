@@ -51,27 +51,34 @@ public class Motors implements Runnable{
 	        this.speed = speed;
 	    }
 	    
-	    // FALSE kun linja ei ole näkyvissä.Korjausliikkeitä.
-	    if (!DataExchange.isLineDetected()) {
+	    // TRUE kun linja on näkyvissä.Korjausliikkeitä.
+	    if (DataExchange.isLineDetected()) {
 	        //KÄÄNNÖS 1.
-	        if (colorValue < 0.1) {
+	         
 	        	motorA.setPower(50);
 	        	motorB.setPower(25);        
 	        	// Tietoa color sensorin arvoista.
 	        	//System.out.println("color value: " + colorValue);
 	        	//Tietoa ultra sensorin arvoista
 	        	//System.out.println("distance: " + distanceValue);
-	        }
-	        //KÄÄNNÖS 2.
-	        if (colorValue >= 0.1) {
-	        	motorA.setPower(25);
-	        	motorB.setPower(50);   
-	        	// Tietoa color sensorin arvoista.
-	        	//System.out.println("color value: " + colorValue);
-	        	//Tietoa ultra sensorin arvoista
-	        	//System.out.println("distance: " + distanceValue);
-	        }
+	        
 	    }
+        //KÄÄNNÖS 2.
+    	else {
+    		motorA.setPower(25);
+        	motorB.setPower(50);   
+        	// Tietoa color sensorin arvoista.
+        	//System.out.println("color value: " + colorValue);
+        	//Tietoa ultra sensorin arvoista
+        	//System.out.println("distance: " + distanceValue);
+    	}
+   
+	    
+	    
+	    
+	    
+	    
+	    
 	    
 	    // TRUE kun linja on näkyvissä.Täysillä eteenpäin.
 	    while (DataExchange.isLineDetected()) {

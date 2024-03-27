@@ -18,17 +18,23 @@ public class LejosApp {
 	//private static ColorSensor cs;
     private static ObstacleDetector od;
     private static DataExchange de;
+    private static Motors urm;
 
     public static void main(String[] args) {
     	de = new DataExchange();
-    	
+    	urm = new Motors(100);
     	od = new ObstacleDetector(de);
     	
     	Thread thread1 = new Thread(od);
     	
+    	Thread thread2 = new Thread(urm);
+    	
     	
     	thread1.setDaemon(true);
     	thread1.start();
+    	
+    	thread2.setDaemon(true);
+    	thread2.start();
     	
         Button.waitForAnyPress();
     }

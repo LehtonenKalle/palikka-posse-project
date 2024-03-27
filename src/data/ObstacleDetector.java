@@ -8,7 +8,7 @@ import lejos.utility.Delay;
 
 
 public class ObstacleDetector implements Runnable {
-	private DataExchange DEObj;
+	private DataExchange DEObj = new DataExchange();
 	private static EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S4);
 	
 	public ObstacleDetector(DataExchange DE) {

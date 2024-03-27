@@ -17,6 +17,7 @@ public class LejosApp {
 	
 	//private static ColorSensor cs;
     private static ObstacleDetector od;
+    private static LightSensor ls;
     private static DataExchange de;
     private static Motors urm;
 
@@ -24,11 +25,13 @@ public class LejosApp {
     	de = new DataExchange();
     	urm = new Motors(100);
     	od = new ObstacleDetector(de);
+    	ls = new LightSensor(de);
     	
     	Thread thread1 = new Thread(od);
     	
     	Thread thread2 = new Thread(urm);
     	
+    	Thread thread3 = new Thread(ls);
     	
     	thread1.setDaemon(true);
     	thread1.start();
@@ -36,6 +39,10 @@ public class LejosApp {
     	thread2.setDaemon(true);
     	thread2.start();
     	
+    	thread3.setDaemon(true);
+    	thread3.start();
+    	
+    	Button.LEDPattern(4);
         Button.waitForAnyPress();
     }
 }

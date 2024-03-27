@@ -12,7 +12,7 @@ public class LightSensor implements Runnable {
         while (true) {
             double colorValue = getColor();
             if (colorValue < 0.1) {
-            	colorValue = 
+            	//colorValue = 
                 // Send data to motors
             }
             else {
@@ -31,3 +31,5 @@ public class LightSensor implements Runnable {
         return colorValue;
     }
 }
+
+

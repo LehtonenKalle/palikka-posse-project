@@ -16,16 +16,15 @@ import lejos.utility.Delay;
 public class LejosApp {
 	
 	//private static ColorSensor cs;
-    private static UltrasonicSensor us;
+    private static ObstacleDetector od;
     private static DataExchange de;
 
     public static void main(String[] args) {
     	de = new DataExchange();
     	
-    	UltrasonicSensor us = new UltrasonicSensor(de);
+    	od = new ObstacleDetector(de);
     	
-    	
-    	Thread thread1 = new Thread(us);
+    	Thread thread1 = new Thread(od);
     	
     	
     	thread1.setDaemon(true);

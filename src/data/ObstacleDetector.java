@@ -7,12 +7,11 @@ import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
 
 
-public class UltrasonicSensor implements Runnable {
-	
+public class ObstacleDetector implements Runnable {
 	private DataExchange DEObj = new DataExchange();
 	private static EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S4);
 	
-	public UltrasonicSensor(DataExchange DE) {
+	public ObstacleDetector(DataExchange DE) {
 		DEObj = DE;
 	}
 	
@@ -38,4 +37,5 @@ public class UltrasonicSensor implements Runnable {
         
         return distanceValue;
 	}
+	
 }

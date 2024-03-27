@@ -6,12 +6,12 @@ public class DataExchange {
 		
 	}
 		
-		public void setObstacleDetected(boolean status) {
-			obstacleDetected = status;
-		}
-		public boolean getObstacleDetected() {
-			return obstacleDetected;
-		}
+	public void setObstacleDetected(boolean status) {
+		obstacleDetected = status;
+	}
+	public boolean getObstacleDetected() {
+		return obstacleDetected;
+	}
 	
 	
 }

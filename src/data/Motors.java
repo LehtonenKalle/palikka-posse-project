@@ -28,9 +28,10 @@ public class Motors implements Runnable{
 	        this.speed = speed;
 	}
 	//constructori
-	public Motors(int speed) {
+	public Motors(DataExchange DE,int speed) {
 		super();
 		this.speed = speed;
+		DEObj = DE;
 	}
 	// Inside the Thread
 	@Override
@@ -48,7 +49,7 @@ public class Motors implements Runnable{
     		    motorB.close();
     		    // Loop loppuu.
     		    break;
-    	    } else {
+    	    }
     	    	// LINJA TRUE, Linja näkyvissä. KÄÄNNÖS 1. Rajat asetettu Lightsensor luokassa.
     		    if (DEObj.getLineDetected()) {
     		    	// A Vasen.
@@ -75,20 +76,45 @@ public class Motors implements Runnable{
     		    if (DEObj.getObstacleDetected()) {
     		    	// A Vasen.
     		        // B Oikea.
-    		        	// Nopea suunnan muutos pois päin esteestä. 90 astetta.
-    		        	motorA.setPower(50);
-    		        	motorB.setPower(-50);
-    		        	Delay.msDelay(1000);
+//    		        	180 astetta.
+//    		        	motorA.setPower(50);
+//    		        	motorB.setPower(-50);
+//    		        	Delay.msDelay(1000);
+    		    		// 90 astetta.Käännös.
+		        		motorA.setPower(50);
+		        		motorB.setPower(-50);
+		        		Delay.msDelay(500);
     		        	// Jatketaan suoraan hetki.
     		            motorA.setPower(50);
     		            motorB.setPower(50);
     		            Delay.msDelay(1000);
-    		        	// Nopea suunnan muutos takaisin viivalle. 90 astetta.
+    		            // 90 astetta.Käännös.
     		        	motorA.setPower(-50);
     		        	motorB.setPower(50);
-    		        	Delay.msDelay(1000);
+    		        	Delay.msDelay(500);
+    		        	// Jatketaan suoraan hetki.
+    		            motorA.setPower(50);
+    		            motorB.setPower(50);
+    		            Delay.msDelay(1700);
+    		            // 90 astetta.Käännös.
+    		        	motorA.setPower(-50);
+    		        	motorB.setPower(50);
+    		        	Delay.msDelay(500);
+    		        	// Jatketaan suoraan hetki.
+    		            motorA.setPower(50);
+    		            motorB.setPower(50);
+    		            Delay.msDelay(1000);
+    		            if(DEObj.getLineDetected()) {
+    		            	// 90 astetta.Käännös.
+    		            	motorA.stop();
+    		            	motorB.stop();
+//    		        		motorA.setPower(50);
+//    		        		motorB.setPower(-50);
+//    		        		Delay.msDelay(500);
+    		            }
+		        		
     		    }
-    	    }
+    	    
     	} while (Button.getButtons() == 0);//Loop jatkuu niin kauan kunnes nappia painetaan.
 	}//End of inside the thread.
 }//End of class.

@@ -23,7 +23,7 @@ public class LejosApp {
 
     public static void main(String[] args) {
     	de = new DataExchange();
-    	urm = new Motors(100);
+    	urm = new Motors(de,100);
     	od = new ObstacleDetector(de);
     	ls = new LightSensor(de);
     	
@@ -32,6 +32,7 @@ public class LejosApp {
     	Thread thread2 = new Thread(urm);
     	
     	Thread thread3 = new Thread(ls);
+
     	
     	thread1.setDaemon(true);
     	thread1.start();

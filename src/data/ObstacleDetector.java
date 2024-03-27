@@ -17,7 +17,7 @@ public class ObstacleDetector implements Runnable {
 	
 	public void run() {
 		while (true) {
-			System.out.println(getDistance());
+			//System.out.println(getDistance());
 			if (getDistance() < 7) {
 				DEObj.setObstacleDetected(true);
 			} else {

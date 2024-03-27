@@ -5,19 +5,24 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.SampleProvider;
 
 public class LightSensor implements Runnable {
-
+	private DataExchange DEObj = new DataExchange();
     private static EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S3);
 
+    public LightSensor(DataExchange DE) {
+		DEObj = DE;
+	}
+    
     public void run() {
         while (true) {
             double colorValue = getColor();
             if (colorValue < 0.1) {
             	//colorValue = 
                 // Send data to motors
+            	DEObj.setLineDetected(true);
             }
-            else {
-            	
+            else if (colorValue > 0.1){
                 // Send data to motors
+            	DEObj.setLineDetected(false);
             }
         }
     }

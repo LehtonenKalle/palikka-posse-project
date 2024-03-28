@@ -14,14 +14,16 @@ public class LightSensor implements Runnable {
     
     public void run() {
         while (true) {
-            double colorValue = getColor();            //System.out.println(colorValue);
-            if (colorValue < 0.1) {
+            double colorValue = getColor();
+            System.out.println("color value:" + colorValue);            //System.out.println(colorValue);
+            if (colorValue < 0.33) {
             	//colorValue = 
                 // Send data to motors
             	DEObj.setLineDetected(true);
             	
             }
-            else if (colorValue > 0.1){
+            // black = 0.1
+            else if (colorValue > 0.33){
                 // Send data to motors
             	DEObj.setLineDetected(false);
             }

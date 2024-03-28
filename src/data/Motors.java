@@ -101,17 +101,18 @@ public class Motors implements Runnable{
     		        	motorB.setPower(50);
     		        	Delay.msDelay(500);
     		        	// Jatketaan suoraan hetki.
-    		            motorA.setPower(50);
-    		            motorB.setPower(50);
-    		            Delay.msDelay(1000);
-    		            if(DEObj.getLineDetected()) {
-    		            	// 90 astetta.Käännös.
-    		            	motorA.stop();
-    		            	motorB.stop();
-//    		        		motorA.setPower(50);
-//    		        		motorB.setPower(-50);
-//    		        		Delay.msDelay(500);
-    		            }
+    		        	do {
+        		            motorA.setPower(50);
+        		            motorB.setPower(50);
+    		        	} while (!DEObj.getLineDetected());
+    		       
+//		            	motorA.stop();
+//		            	motorB.stop();
+    		        	do {
+    		        		motorA.setPower(50);
+    		        		motorB.setPower(-10);
+    		        	} while (DEObj.getLineDetected());
+    		            
 		        		
     		    }
     	    

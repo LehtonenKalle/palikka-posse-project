@@ -1,5 +1,8 @@
 package data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
 import lejos.hardware.motor.UnregulatedMotor;
@@ -115,6 +118,38 @@ public class Motors implements Runnable{
     		        	//System.out.println("distance: " + distanceValue);
     		    }
     		    // ESTE TRUE, kun este on näkyvissä.Korjausliikkeitä.
+    		    
+    		    if(DEObj.getObstacleDetected()== true && jotain muuta) {
+    		    	List<Movement> recordedMovements = new ArrayList<>();
+    				recordedMovements.add(new Movement(50,25,0)); //1
+    				recordedMovements.add(new Movement(25,50,1000));//2
+    				recordedMovements.add(new Movement(50,25,1500));//3
+    				recordedMovements.add(new Movement(25,50,2200));//4
+    				recordedMovements.add(new Movement(0,0,2500));//5
+    				
+    				List<Movement> reversedMovements = new ArrayList<>();
+    				
+    				//otetaan viimeinen aika ylös
+    				Movement lastMovement = recordedMovements.get(recordedMovements.size()-1);
+    				int lastTimestamp = lastMovement.getTimestamp();
+    				
+    				//käydään läpi jokainen muuttuja listassa
+    				for (int i = recordedMovements.size() - 1; i >= 0; i--) {
+    		            Movement movement = recordedMovements.get(i);  
+    		            int time = lastTimestamp - movement.getTimestamp();
+    		            Movement reversedMovement = new Movement(-movement.getPowerA(), -movement.getPowerB(), time);
+    		            lastTimestamp -= time;
+    		            reversedMovements.add(reversedMovement);
+    		            System.out.println(lastTimestamp);
+    		        }
+    					
+    				System.out.println("1");
+    				for (Movement movement : reversedMovements) {
+    		            System.out.println("Power A: " + movement.getPowerA() + ", Power B: " + movement.getPowerB() + ", Timestamp: " + movement.getTimestamp());
+    		        }
+    			}
+    		}
+    		    }
     		    
     	    
     	} while (Button.getButtons() == 0);//Loop jatkuu niin kauan kunnes nappia painetaan.

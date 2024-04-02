@@ -8,6 +8,7 @@ import lejos.hardware.Sound;
 import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.utility.Delay;
+import lejos.utility.Stopwatch;
 
 //Outside the Thread
 public class Motors implements Runnable{
@@ -15,6 +16,9 @@ public class Motors implements Runnable{
 	private int speed;
 	// DataExchange objekti luodaan.
 	private DataExchange DEObj = new DataExchange();
+	List<Movement> recordedMovements = new ArrayList<>();
+	boolean obstacleAvoided = false;
+	Stopwatch stopwatch = new Stopwatch();
 	
 	// Luo kaksi moottori objektia.
 	// A Vasen.
@@ -39,8 +43,12 @@ public class Motors implements Runnable{
 	// Inside the Thread
 	@Override
 	public void run() {
-		motorA.setPower(this.speed);
-    	motorB.setPower(this.speed);
+		if(recordedMovements.size() == 0) {
+			recordedMovements.add(new Movement(0,0,0));
+		}
+		
+				
+		
     	do {
     	    // Tarkistetaan onko nappia painettu käynnistyksen jälkeen.
     	    if (Button.getButtons() != 0) {
@@ -53,7 +61,8 @@ public class Motors implements Runnable{
     		    // Loop loppuu.
     		    break;
     	    }
-    	    if (DEObj.getObstacleDetected()) {
+    	    if (DEObj.getObstacleDetected() && obstacleAvoided == false) {
+    	    	
 		    	// A Vasen.
 		        // B Oikea.
 //		        	180 astetta.
@@ -61,30 +70,37 @@ public class Motors implements Runnable{
 //		        	motorB.setPower(-50);
 //		        	Delay.msDelay(1000);
 		    		// 90 astetta.Käännös.
+    	    		recordedMovements.add(new Movement(motorA.getPower(), motorB.getPower(), stopwatch.elapsed()));
 	        		motorA.setPower(50);
 	        		motorB.setPower(-50);
 	        		Delay.msDelay(550);
+	        		recordedMovements.add(new Movement(motorA.getPower(), motorB.getPower(), stopwatch.elapsed()));
 		        	// Jatketaan suoraan hetki.
 		            motorA.setPower(50);
 		            motorB.setPower(50);
 		            Delay.msDelay(1000);
+		            recordedMovements.add(new Movement(motorA.getPower(), motorB.getPower(), stopwatch.elapsed()));
 		            // 90 astetta.Käännös.
 		        	motorA.setPower(-50);
 		        	motorB.setPower(50);
 		        	Delay.msDelay(500);
+		        	recordedMovements.add(new Movement(motorA.getPower(), motorB.getPower(), stopwatch.elapsed()));
 		        	// Jatketaan suoraan hetki.
 		            motorA.setPower(50);
 		            motorB.setPower(50);
 		            Delay.msDelay(1800);
+		            recordedMovements.add(new Movement(motorA.getPower(), motorB.getPower(), stopwatch.elapsed()));
 		            // 90 astetta.Käännös.
 		        	motorA.setPower(-50);
 		        	motorB.setPower(50);
 		        	Delay.msDelay(400);
+		        	recordedMovements.add(new Movement(motorA.getPower(), motorB.getPower(), stopwatch.elapsed()));
 		        	// Jatketaan suoraan hetki.
 		        	do {
     		            motorA.setPower(25);
     		            motorB.setPower(25);
 		        	} while (!DEObj.getLineDetected());
+		        	recordedMovements.add(new Movement(motorA.getPower(), motorB.getPower(), stopwatch.elapsed()));
 		       
 //	            	motorA.stop();
 //	            	motorB.stop();
@@ -92,11 +108,14 @@ public class Motors implements Runnable{
 		        		motorA.setPower(50);
 		        		motorB.setPower(-10);
 		        	} while (DEObj.getLineDetected());
+		        	recordedMovements.add(new Movement(motorA.getPower(), motorB.getPower(), stopwatch.elapsed()));
+		        	obstacleAvoided = true;
 		            
 	        		
 		    }
     	    	// LINJA TRUE, Linja näkyvissä. KÄÄNNÖS 1. Rajat asetettu Lightsensor luokassa.
     		    if (DEObj.getLineDetected()) {
+    		    	
     		    	// A Vasen.
     		        // B Oikea.
     		        	motorA.setPower(50);
@@ -108,6 +127,7 @@ public class Motors implements Runnable{
     		    }
     		    // LINJA FALSE, Linja näkyvissä. KÄÄNNÖS 2. Rajat asetettu Lightsensor luokassa.
     		    if (!DEObj.getLineDetected()) {
+    		    	
     		    	// A Vasen.
     		        // B Oikea.
     		        	motorA.setPower(15);
@@ -118,14 +138,23 @@ public class Motors implements Runnable{
     		        	//System.out.println("distance: " + distanceValue);
     		    }
     		    // ESTE TRUE, kun este on näkyvissä.Korjausliikkeitä.
+    		    Movement lastRecordedMovement = recordedMovements.get(recordedMovements.size() - 1);
+    		    if(lastRecordedMovement.getPowerA() != motorA.getPower() && lastRecordedMovement.getPowerB() != motorB.getPower()) {
+    		    	recordedMovements.add(new Movement(motorA.getPower(), motorB.getPower(), stopwatch.elapsed()));
+    		    }
+    		    	
+    		   
     		    
-    		    if(DEObj.getObstacleDetected()== true && jotain muuta) {
-    		    	List<Movement> recordedMovements = new ArrayList<>();
-    				recordedMovements.add(new Movement(50,25,0)); //1
-    				recordedMovements.add(new Movement(25,50,1000));//2
-    				recordedMovements.add(new Movement(50,25,1500));//3
-    				recordedMovements.add(new Movement(25,50,2200));//4
-    				recordedMovements.add(new Movement(0,0,2500));//5
+    		    if(DEObj.getObstacleDetected()== true && obstacleAvoided == true) {
+    		    	recordedMovements.add(new Movement(motorA.getPower(), motorB.getPower(), stopwatch.elapsed()));
+    		    	motorA.setPower(0);
+    		    	motorB.setPower(0);
+    		    	
+    				//recordedMovements.add(new Movement(50,25,0)); //1
+    				//recordedMovements.add(new Movement(25,50,1000));//2
+    				//recordedMovements.add(new Movement(50,25,1500));//3
+    				//recordedMovements.add(new Movement(25,50,2200));//4
+    				//recordedMovements.add(new Movement(0,0,2500));//5
     				
     				List<Movement> reversedMovements = new ArrayList<>();
     				
@@ -140,16 +169,19 @@ public class Motors implements Runnable{
     		            Movement reversedMovement = new Movement(-movement.getPowerA(), -movement.getPowerB(), time);
     		            lastTimestamp -= time;
     		            reversedMovements.add(reversedMovement);
-    		            System.out.println(lastTimestamp);
+    		            
     		        }
-    					
-    				System.out.println("1");
+    				
+    				//Tähän takaperinajo looppiin
     				for (Movement movement : reversedMovements) {
-    		            System.out.println("Power A: " + movement.getPowerA() + ", Power B: " + movement.getPowerB() + ", Timestamp: " + movement.getTimestamp());
+    					motorA.setPower(movement.getPowerA());
+    					motorB.setPower(movement.getPowerB());
+    					Delay.msDelay(movement.getTimestamp() + 10);
+    		            //System.out.println("Power A: " + movement.getPowerA() + ", Power B: " + movement.getPowerB() + ", Timestamp: " + movement.getTimestamp());
     		        }
     			}
-    		}
-    		    }
+    		
+    		    	
     		    
     	    
     	} while (Button.getButtons() == 0);//Loop jatkuu niin kauan kunnes nappia painetaan.

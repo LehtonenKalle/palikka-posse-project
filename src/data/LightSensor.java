@@ -17,7 +17,7 @@ public class LightSensor implements Runnable {
         while (true) {
         	// Using getColor()-method to get the light value
             double colorValue = getColor();
-            System.out.println("color value:" + colorValue);            //System.out.println(colorValue);
+            //System.out.println("color value:" + colorValue);            //System.out.println(colorValue);
             if (colorValue < 0.1) {
 
                 // Send data to dataExchange

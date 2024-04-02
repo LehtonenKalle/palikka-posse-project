@@ -5,8 +5,7 @@ public class DataExchange {
 	private boolean	lineDetected = false;
 	public DataExchange() {
 		
-	}
-		
+	}	
 	public void setObstacleDetected(boolean status) {
 		obstacleDetected = status;
 	}
@@ -19,6 +18,4 @@ public class DataExchange {
 	public boolean getLineDetected() {
 		return lineDetected;
 	}
-	
-	
 }

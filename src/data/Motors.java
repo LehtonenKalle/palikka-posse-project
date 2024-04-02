@@ -112,8 +112,6 @@ public class Motors implements Runnable{
     		        		motorA.setPower(50);
     		        		motorB.setPower(-10);
     		        	} while (DEObj.getLineDetected());
-    		            
-		        		
     		    }
     	    
     	} while (Button.getButtons() == 0);//Loop jatkuu niin kauan kunnes nappia painetaan.

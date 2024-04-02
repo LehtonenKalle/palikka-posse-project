@@ -50,12 +50,54 @@ public class Motors implements Runnable{
     		    // Loop loppuu.
     		    break;
     	    }
+    	    if (DEObj.getObstacleDetected()) {
+		    	// A Vasen.
+		        // B Oikea.
+//		        	180 astetta.
+//		        	motorA.setPower(50);
+//		        	motorB.setPower(-50);
+//		        	Delay.msDelay(1000);
+		    		// 90 astetta.Käännös.
+	        		motorA.setPower(50);
+	        		motorB.setPower(-50);
+	        		Delay.msDelay(550);
+		        	// Jatketaan suoraan hetki.
+		            motorA.setPower(50);
+		            motorB.setPower(50);
+		            Delay.msDelay(1000);
+		            // 90 astetta.Käännös.
+		        	motorA.setPower(-50);
+		        	motorB.setPower(50);
+		        	Delay.msDelay(500);
+		        	// Jatketaan suoraan hetki.
+		            motorA.setPower(50);
+		            motorB.setPower(50);
+		            Delay.msDelay(1800);
+		            // 90 astetta.Käännös.
+		        	motorA.setPower(-50);
+		        	motorB.setPower(50);
+		        	Delay.msDelay(400);
+		        	// Jatketaan suoraan hetki.
+		        	do {
+    		            motorA.setPower(25);
+    		            motorB.setPower(25);
+		        	} while (!DEObj.getLineDetected());
+		       
+//	            	motorA.stop();
+//	            	motorB.stop();
+		        	do {
+		        		motorA.setPower(50);
+		        		motorB.setPower(-10);
+		        	} while (DEObj.getLineDetected());
+		            
+	        		
+		    }
     	    	// LINJA TRUE, Linja näkyvissä. KÄÄNNÖS 1. Rajat asetettu Lightsensor luokassa.
     		    if (DEObj.getLineDetected()) {
     		    	// A Vasen.
     		        // B Oikea.
     		        	motorA.setPower(50);
-    		        	motorB.setPower(25);        
+    		        	motorB.setPower(15);        
     		        	// Tietoa color sensorin arvoista.
     		        	//System.out.println("color value: " + colorValue);
     		        	//Tietoa ultra sensorin arvoista
@@ -65,7 +107,7 @@ public class Motors implements Runnable{
     		    if (!DEObj.getLineDetected()) {
     		    	// A Vasen.
     		        // B Oikea.
-    		        	motorA.setPower(25);
+    		        	motorA.setPower(15);
     		        	motorB.setPower(50);        
     		        	// Tietoa color sensorin arvoista.
     		        	//System.out.println("color value: " + colorValue);
@@ -73,48 +115,7 @@ public class Motors implements Runnable{
     		        	//System.out.println("distance: " + distanceValue);
     		    }
     		    // ESTE TRUE, kun este on näkyvissä.Korjausliikkeitä.
-    		    if (DEObj.getObstacleDetected()) {
-    		    	// A Vasen.
-    		        // B Oikea.
-//    		        	180 astetta.
-//    		        	motorA.setPower(50);
-//    		        	motorB.setPower(-50);
-//    		        	Delay.msDelay(1000);
-    		    		// 90 astetta.Käännös.
-		        		motorA.setPower(50);
-		        		motorB.setPower(-50);
-		        		Delay.msDelay(500);
-    		        	// Jatketaan suoraan hetki.
-    		            motorA.setPower(50);
-    		            motorB.setPower(50);
-    		            Delay.msDelay(1000);
-    		            // 90 astetta.Käännös.
-    		        	motorA.setPower(-50);
-    		        	motorB.setPower(50);
-    		        	Delay.msDelay(500);
-    		        	// Jatketaan suoraan hetki.
-    		            motorA.setPower(50);
-    		            motorB.setPower(50);
-    		            Delay.msDelay(1700);
-    		            // 90 astetta.Käännös.
-    		        	motorA.setPower(-50);
-    		        	motorB.setPower(50);
-    		        	Delay.msDelay(500);
-    		        	// Jatketaan suoraan hetki.
-    		        	do {
-        		            motorA.setPower(50);
-        		            motorB.setPower(50);
-    		        	} while (!DEObj.getLineDetected());
-    		       
-//		            	motorA.stop();
-//		            	motorB.stop();
-    		        	do {
-    		        		motorA.setPower(50);
-    		        		motorB.setPower(-10);
-    		        	} while (DEObj.getLineDetected());
-    		            
-		        		
-    		    }
+    		    
     	    
     	} while (Button.getButtons() == 0);//Loop jatkuu niin kauan kunnes nappia painetaan.
 	}//End of inside the thread.

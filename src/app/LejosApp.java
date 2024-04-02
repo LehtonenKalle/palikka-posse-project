@@ -1,5 +1,7 @@
 package app;
 
+import java.io.File;
+
 import data.*;
 
 
@@ -20,18 +22,23 @@ public class LejosApp {
     private static LightSensor ls;
     private static DataExchange de;
     private static Motors urm;
+    private static SoundPlayer sp;
 
     public static void main(String[] args) {
     	de = new DataExchange();
     	urm = new Motors(de,100);
     	od = new ObstacleDetector(de);
     	ls = new LightSensor(de);
+    	sp = new SoundPlayer(de);
     	
     	Thread thread1 = new Thread(od);
     	
     	Thread thread2 = new Thread(urm);
     	
     	Thread thread3 = new Thread(ls);
+    	
+    	Thread thread4 = new Thread(sp);
+    	
 
     	
     	thread1.setDaemon(true);
@@ -42,6 +49,9 @@ public class LejosApp {
     	
     	thread3.setDaemon(true);
     	thread3.start();
+    	
+    	thread4.setDaemon(true);
+    	thread4.start();
     	
     	Button.LEDPattern(4);
         Button.waitForAnyPress();

@@ -5,6 +5,7 @@ import java.util.List;
 
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.utility.Delay;
@@ -43,6 +44,8 @@ public class Motors implements Runnable{
 	// Inside the Thread
 	@Override
 	public void run() {
+		stopwatch.reset();
+		
 		if(recordedMovements.size() == 0) {
 			recordedMovements.add(new Movement(0,0,0));
 		}
@@ -146,9 +149,20 @@ public class Motors implements Runnable{
     		   
     		    
     		    if(DEObj.getObstacleDetected()== true && obstacleAvoided == true) {
+    		    	
+    		    	
     		    	recordedMovements.add(new Movement(motorA.getPower(), motorB.getPower(), stopwatch.elapsed()));
     		    	motorA.setPower(0);
     		    	motorB.setPower(0);
+    		    	
+    		    	long elapsedTime = stopwatch.elapsed();
+    	            long seconds = elapsedTime / 1000;
+    	            long minutes = seconds / 60;
+    	            seconds %= 60;
+
+    	            LCD.drawString(String.format("%02d:%02d", minutes, seconds), 0, 0);
+    		    	
+    		    	Delay.msDelay(5000);
     		    	
     				//recordedMovements.add(new Movement(50,25,0)); //1
     				//recordedMovements.add(new Movement(25,50,1000));//2

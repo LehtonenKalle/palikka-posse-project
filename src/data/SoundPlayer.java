@@ -13,6 +13,6 @@ public class SoundPlayer implements Runnable {
 	}
 	
 	public void run() {
-		Sound.playSample(new File("Tokyo-Drift-22050Hz.wav"), 0);
+		Sound.playSample(new File("Tokyo-Drift-22050Hz.wav"), 200);
 	}
 }

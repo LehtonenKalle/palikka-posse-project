@@ -1,10 +1,22 @@
+/**
+ * The main class for the Lejos application.
+ *
+ * This application was developed by a team consisting of:
+ * - Niko Laaksonen
+ * - Joni Mitronen
+ * - Kalle Lehtonen
+ * - Arttu Liitti
+ * 
+ * This application was collaboratively developed by a team where all members contributed
+ * extensively across all aspects of the project. Although each member had their primary areas
+ * of focus, the team worked closely together, sharing ideas, providing feedback, and supporting
+ * each other throughout the development process.
+ */
+
 package app;
 
 import java.io.File;
-
 import data.*;
-
-
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
 import lejos.hardware.motor.UnregulatedMotor;
@@ -17,13 +29,19 @@ import lejos.utility.Delay;
 
 public class LejosApp {
 	
-	//private static ColorSensor cs;
     private static ObstacleDetector od;
     private static LightSensor ls;
     private static DataExchange de;
     private static Motors urm;
     private static SoundPlayer sp;
 
+    
+    /**
+     * The main method of the Lejos application.
+     * Initializes necessary objects and starts threads for different functionalities.
+     * @param args The command line arguments.
+     */
+    
     public static void main(String[] args) {
     	de = new DataExchange();
     	urm = new Motors(de,100);

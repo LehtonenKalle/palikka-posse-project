@@ -1,5 +1,4 @@
 package data;
-
 /**
  * This class is used for the reverse functionality in Motors-class.
  * Motors.java calls this class for each unique movement
@@ -8,7 +7,6 @@ public class Movement {
 	private int powerA;
     private int powerB;
     private int timestamp;
-
     /**
      * @param powerA current power value of the motorA
      * @param powerB current power value of the motorB
@@ -27,7 +25,6 @@ public class Movement {
     	this.powerA = powerA;
         this.powerB = powerB;
     }
-    
     /**
      * sets the timestamp value 
      * @param integer value of the current time in ms
@@ -50,7 +47,6 @@ public class Movement {
     public int getPowerB() {
         return powerB;
     }
-
     /**
      * @return returns the current timestamp
      */

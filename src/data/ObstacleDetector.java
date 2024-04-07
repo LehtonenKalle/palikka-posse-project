@@ -6,7 +6,6 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
 
-
 /**
  * This class sends information about detected obstacles to DataExchange utilizing UltrasonicSensor values.
  */
@@ -15,7 +14,6 @@ public class ObstacleDetector implements Runnable {
 	private DataExchange DEObj = new DataExchange();
 	
 	private static EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S4);
-	
 	/**
 	 * Constructor for the class
 	 * @param DE DataExchange object that is used for communication between components
@@ -45,8 +43,6 @@ public class ObstacleDetector implements Runnable {
 		}
 
 	}
-	
-	
 	
 	/**
 	 * Turns on the distance mode and gets the fetched distance value from SampleProvider

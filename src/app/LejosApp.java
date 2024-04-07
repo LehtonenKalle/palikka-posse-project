@@ -1,17 +1,4 @@
-/**
- * The main class for the Lejos application.
- *
- * This application was developed by a team consisting of:
- * - Niko Laaksonen
- * - Joni Mitronen
- * - Kalle Lehtonen
- * - Arttu Liitti
- * 
- * This application was collaboratively developed by a team where all members contributed
- * extensively across all aspects of the project. Although each member had their primary areas
- * of focus, the team worked closely together, sharing ideas, providing feedback, and supporting
- * each other throughout the development process.
- */
+
 
 package app;
 
@@ -26,6 +13,21 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
+
+/**
+ * The main class for the Lejos application.
+ *
+ * This application was developed by a team consisting of:
+ * - Niko Laaksonen
+ * - Joni Mitronen
+ * - Kalle Lehtonen
+ * - Arttu Liitti
+ * 
+ * This application was collaboratively developed by a team where all members contributed
+ * extensively across all aspects of the project. Although each member had their primary areas
+ * of focus, the team worked closely together, sharing ideas, providing feedback, and supporting
+ * each other throughout the development process.
+ */
 
 public class LejosApp {
 	

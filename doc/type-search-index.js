@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"data","l":"DataExchange"},{"p":"app","l":"LejosApp"},{"p":"data","l":"LightSensor"},{"p":"data","l":"Motors"},{"p":"data","l":"Movement"},{"p":"data","l":"ObstacleDetector"},{"p":"data","l":"SoundPlayer"}];updateSearchResults();

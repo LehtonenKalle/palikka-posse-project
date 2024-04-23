@@ -42,7 +42,7 @@ public class httptest {
 
   		String s=null;
 		try {
-			url = new URL("http://192.168.1.210:8080/rest/lego/getvalues");
+			url = new URL("http://192.168.1.11:8080/rest/lego/getvalues");
 			conn = (HttpURLConnection)url.openConnection();
   			System.out.println(conn.toString()); //Tulostaa vain URLin
 			InputStream is=null;

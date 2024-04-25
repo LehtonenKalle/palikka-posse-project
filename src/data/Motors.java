@@ -30,24 +30,9 @@ public class Motors implements Runnable{
 	// Two unregulated motor objects are created.
     UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A); // LEFT
     UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.B); // RIGHT
-   
     
-    // Getter for attribute speed
-    /**
-     * Retrieves the speed of the motors.
-     * @return The current speed of the motors.
-     */
-	public int getSpeed() {
-		return speed;
-	}
-	// Setter for attribute speed
-	/**
-	 * Sets the speed of the motors.
-	 * @param speed The speed to set for the motors.
-	 */
-	public void setSpeed(int speed) {
-	        this.speed = speed;
-	}
+    SharedData sd = new SharedData();
+   
     // Constructor documentation
     /**
      * Constructs a new Motors object with the specified DataExchange and speed.
@@ -68,6 +53,10 @@ public class Motors implements Runnable{
 	// Inside the Thread - Section
 	@Override
 	public void run() {
+		motorA.setPower(sd.getMotorAValue());
+		motorB.setPower(sd.getMotorBValue());
+		System.out.println("MotorA value: " + sd.getMotorAValue());
+		System.out.println("MotorB value: " + sd.getMotorBValue());
 		// timer is reseted
 		stopwatch.reset();
 		// Initialize the recordedMovements list with a default movement if it's empty
@@ -137,13 +126,14 @@ public class Motors implements Runnable{
     	   	// Boundary for this flag is set on LightSensor Class.
     		if (DEObj.getLineDetected()) {
     		    motorA.setPower(50); //LEFT
-    		    motorB.setPower(15); //RIGHT        
+    		    motorB.setPower(15); //RIGHT  
+    		    
     		}
     		// WHEN LINE FLAG = FALSE , we do this action to get to the opposite direction.
     	    // Boundary for this flag is set on LightSensor Class.
     		if (!DEObj.getLineDetected()) {
     		    motorA.setPower(15); //LEFT
-    		    motorB.setPower(50); //RIGHT        
+    		    motorB.setPower(50); //RIGHT    
     	    }
     			// Record movement if there's any change in motor power
     		    Movement lastRecordedMovement = recordedMovements.get(recordedMovements.size() - 1);
@@ -187,4 +177,21 @@ public class Motors implements Runnable{
     			}
     	} while (Button.getButtons() == 0);//Loop continues until any button is pressed.
 	}//End of inside the thread - Section
+	
+    // Getter for attribute speed
+    /**
+     * Retrieves the speed of the motors.
+     * @return The current speed of the motors.
+     */
+	public int getSpeed() {
+		return speed;
+	}
+	// Setter for attribute speed
+	/**
+	 * Sets the speed of the motors.
+	 * @param speed The speed to set for the motors.
+	 */
+	public void setSpeed(int speed) {
+	        this.speed = speed;
+	}
 }//End of class and outside the thread - Section

@@ -29,32 +29,32 @@ public class DataReader implements Runnable{
 			BufferedReader br=null;
 
 			String s=null;
-		try {
-			url = new URL("http://192.168.1.11:8080/rest/lego/getvalues");
-			conn = (HttpURLConnection)url.openConnection();
-				System.out.println(conn.toString()); 
-			InputStream is=null;
 			try {
-				is=conn.getInputStream();
+				url = new URL("http://192.168.1.11:8080/rest/lego/getvalues");
+				conn = (HttpURLConnection)url.openConnection();
+					System.out.println(conn.toString()); 
+				InputStream is=null;
+				try {
+					is=conn.getInputStream();
+				}
+				catch (Exception e) {
+		  			System.out.println("Exception conn.getInputSteam()");
+		  			e.printStackTrace();
+		            System.out.println("Cannot get InputStream!");
+				}
+				isr = new InputStreamReader(is);
+		  		br=new BufferedReader(isr);
+		  		
+		  		s=br.readLine();
+		  		
+	//			while ((s=br.readLine())!=null){
+	//				System.out.println(s);
+	//			}
 			}
-			catch (Exception e) {
-	  			System.out.println("Exception conn.getInputSteam()");
-	  			e.printStackTrace();
-	            System.out.println("Cannot get InputStream!");
-			}
-			isr = new InputStreamReader(is);
-	  		br=new BufferedReader(isr);
-	  		
-	  		s=br.readLine();
-	  		
-//			while ((s=br.readLine())!=null){
-//				System.out.println(s);
-//			}
-		}
-			catch(Exception e) {
-				e.printStackTrace();
-	        System.out.println("Some problem!");
-			}
+				catch(Exception e) {
+					e.printStackTrace();
+		        System.out.println("Some problem!");
+				}
 		
 		/*
 		 * Next section is taking string from the inputstream, splitting it

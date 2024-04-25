@@ -46,6 +46,7 @@ public class LightSensor implements Runnable {
                 // Send data to dataExchange
             	DEObj.setLineDetected(false);
             }
+            System.out.println(SDO.getColorTresHold());
         }
     }
 

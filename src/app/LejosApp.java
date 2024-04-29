@@ -34,9 +34,13 @@ public class LejosApp {
     private static ObstacleDetector od;
     private static LightSensor ls;
     private static DataExchange de;
+    private static Motors urm;
     private static MotorsManual urm;
     private static SoundPlayer sp;
     private static SharedData sd;
+    private static DataSender ds;
+    private static DataToDatabase dtd;
+    
     
     private static DataReader dr;
 
@@ -50,12 +54,16 @@ public class LejosApp {
     public static void main(String[] args) {
     	de = new DataExchange();
     	sd = new SharedData();
-    	dr = new DataReader(sd);
+    	dtd = new DataToDatabase();
     	
+    	dr = new DataReader(sd);
+    	ds = new DataSender(dtd);
+    	
+    	urm = new Motors(de,100);
     	//urm = new Motors(de,100);
     	urm = new MotorsManual(de, sd);
     	od = new ObstacleDetector(de);
-    	ls = new LightSensor(de,sd);
+    	ls = new LightSensor(de,sd,dtd);
     	sp = new SoundPlayer(de);
     	
     	Thread thread1 = new Thread(od);
@@ -68,6 +76,8 @@ public class LejosApp {
     	Thread thread4 = new Thread(sp);
     	
     	Thread thread5 = new Thread(dr);
+    	
+    	Thread thread6 = new Thread(ds);
     	
 
     	
@@ -85,6 +95,9 @@ public class LejosApp {
     	
     	thread5.setDaemon(true);
     	thread5.start();
+    	
+    	thread6.setDaemon(true);
+    	thread6.start();
     	
     	Button.LEDPattern(4);
         Button.waitForAnyPress();

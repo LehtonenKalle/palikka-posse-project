@@ -30,7 +30,7 @@ public class DataReader implements Runnable{
 
 			String s=null;
 			try {
-				url = new URL("http://192.168.1.187:8080/rest/lego/getvalues");
+				url = new URL("http://192.168.56.1:8080/rest/lego/getvalues");
 				conn = (HttpURLConnection)url.openConnection();
 					System.out.println(conn.toString()); 
 				InputStream is=null;

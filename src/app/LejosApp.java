@@ -37,8 +37,8 @@ public class LejosApp {
     private static MotorsManual urm;
     private static SoundPlayer sp;
     private static SharedData sd;
-    
     private static DataReader dr;
+    private static FileDownloader fd;
 
     
     /**
@@ -48,45 +48,61 @@ public class LejosApp {
      */
     
     public static void main(String[] args) {
-    	de = new DataExchange();
-    	sd = new SharedData();
-    	dr = new DataReader(sd);
+//    	de = new DataExchange();
+//    	sd = new SharedData();
+//    	dr = new DataReader(sd);
     	
     	//urm = new Motors(de,100);
-    	urm = new MotorsManual(de, sd);
-    	od = new ObstacleDetector(de);
-    	ls = new LightSensor(de,sd);
-    	sp = new SoundPlayer(de);
+//    	urm = new MotorsManual(de, sd);
+//    	od = new ObstacleDetector(de);
+//    	ls = new LightSensor(de,sd);
+//
+//    	
+//    	Thread thread1 = new Thread(od);
+//    	
+//    	//Thread thread2 = new Thread(urm);
+//    	Thread thread2 = new Thread(urm);
+//    	
+//    	Thread thread3 = new Thread(ls);
+//    	
+//
+//    	
+//    	Thread thread5 = new Thread(dr);
+//    	
+//
+//    	
+//    	thread1.setDaemon(true);
+//    	thread1.start();
+//    	
+//    	thread2.setDaemon(true);
+//    	thread2.start();
+//    	
+//    	thread3.setDaemon(true);
+//    	thread3.start();
+//    	
+//
+//    	
+//    	thread5.setDaemon(true);
+//    	thread5.start();
     	
-    	Thread thread1 = new Thread(od);
     	
-    	//Thread thread2 = new Thread(urm);
-    	Thread thread2 = new Thread(urm);
-    	
-    	Thread thread3 = new Thread(ls);
-    	
-    	Thread thread4 = new Thread(sp);
-    	
-    	Thread thread5 = new Thread(dr);
-    	
+//    	String saveDir = "C:\\Users\\jonim\\Documents\\GitHub\\palikka-posse-project\\";
+    	String saveDir = "./";
 
-    	
-    	thread1.setDaemon(true);
-    	thread1.start();
-    	
-    	thread2.setDaemon(true);
-    	thread2.start();
-    	
-    	thread3.setDaemon(true);
-    	thread3.start();
-    	
-    	thread4.setDaemon(true);
-    	thread4.start();
-    	
-    	thread5.setDaemon(true);
-    	thread5.start();
-    	
-    	Button.LEDPattern(4);
-        Button.waitForAnyPress();
+        // Create instances of SoundPlayer and FileDownloader
+        SoundPlayer soundPlayer = new SoundPlayer(saveDir);
+        FileDownloader fileDownloader = new FileDownloader(saveDir, soundPlayer);
+
+        // Create threads for SoundPlayer and FileDownloader
+        Thread soundPlayerThread = new Thread(soundPlayer);
+        Thread fileDownloaderThread = new Thread(fileDownloader);
+
+        // Start threads
+        soundPlayerThread.start();
+        fileDownloaderThread.start();
+
+        // Wait for user input or timeout
+        Button.LEDPattern(4);
+        Button.waitForAnyPress(0); // Set a timeout of 0 milliseconds to avoid indefinite waiting
     }
 }

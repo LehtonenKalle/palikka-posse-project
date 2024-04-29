@@ -17,6 +17,12 @@ public class DataSender implements Runnable {
 	}
 	
 	public void run() {
+		try {
+            Thread.sleep(5000); // Wait for 5 seconds at start
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+		
 		
 		while(true) {
 			

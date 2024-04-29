@@ -34,7 +34,7 @@ public class LejosApp {
     private static ObstacleDetector od;
     private static LightSensor ls;
     private static DataExchange de;
-    private static Motors urm;
+    //private static Motors urm;
     private static MotorsManual urm;
     private static SoundPlayer sp;
     private static SharedData sd;
@@ -59,7 +59,7 @@ public class LejosApp {
     	dr = new DataReader(sd);
     	ds = new DataSender(dtd);
     	
-    	urm = new Motors(de,100);
+    	//urm = new Motors(de,100);
     	//urm = new Motors(de,100);
     	urm = new MotorsManual(de, sd);
     	od = new ObstacleDetector(de);

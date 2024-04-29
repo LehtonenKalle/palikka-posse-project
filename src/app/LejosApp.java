@@ -35,6 +35,7 @@ public class LejosApp {
     private static LightSensor ls;
     private static DataExchange de;
     private static Motors urm;
+    private static MotorsManual urm;
     private static SoundPlayer sp;
     private static SharedData sd;
     private static DataSender ds;
@@ -59,12 +60,15 @@ public class LejosApp {
     	ds = new DataSender(dtd);
     	
     	urm = new Motors(de,100);
+    	//urm = new Motors(de,100);
+    	urm = new MotorsManual(de, sd);
     	od = new ObstacleDetector(de);
     	ls = new LightSensor(de,sd,dtd);
     	sp = new SoundPlayer(de);
     	
     	Thread thread1 = new Thread(od);
     	
+    	//Thread thread2 = new Thread(urm);
     	Thread thread2 = new Thread(urm);
     	
     	Thread thread3 = new Thread(ls);

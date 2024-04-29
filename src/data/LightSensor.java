@@ -40,7 +40,8 @@ public class LightSensor implements Runnable {
     	Stopwatch stopwatch = new Stopwatch();
         while (true) {
         	// Using getColor()-method to get the light value
-            double colorValue = getColor();            
+            double colorValue = getColor();
+            
             if (colorValue < SDO.getColorTresHold()) {
                 // Send data to dataExchange
             	DEObj.setLineDetected(true);
@@ -57,6 +58,7 @@ public class LightSensor implements Runnable {
             	DEObj.setLineDetected(false);
             	isBelowTreshold = false;
             }
+            //System.out.println(SDO.getColorTresHold());
         }
     }
 

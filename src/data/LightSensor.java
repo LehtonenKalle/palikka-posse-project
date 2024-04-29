@@ -3,6 +3,7 @@ package data;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.SampleProvider;
+import lejos.utility.Stopwatch;
 
 /**
  * The LightSensor class gets the light value from the sensor and sends it to DataExchange 
@@ -13,11 +14,15 @@ public class LightSensor implements Runnable {
     private static EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S3);
     
     private SharedData SDO = new SharedData();
+    private DataToDatabase DTDO = new DataToDatabase();
+    
+    private boolean isBelowTreshold;
     
     //Test
-    public LightSensor(DataExchange DE, SharedData SD) {
+    public LightSensor(DataExchange DE, SharedData SD, DataToDatabase DTD) {
     	DEObj = DE;
     	SDO = SD;
+    	DTDO = DTD;
     }
     
 
@@ -32,21 +37,26 @@ public class LightSensor implements Runnable {
      * if color values are over 0,1 or under 0,1 send data to DataEchange
      */
     public void run() {
+    	Stopwatch stopwatch = new Stopwatch();
         while (true) {
         	// Using getColor()-method to get the light value
-            double colorValue = getColor();            //System.out.println(colorValue);
+            double colorValue = getColor();            
             if (colorValue < SDO.getColorTresHold()) {
-
                 // Send data to dataExchange
             	DEObj.setLineDetected(true);
+            	if(!isBelowTreshold) {
+            		stopwatch.reset();
+            		isBelowTreshold = true;
+            	}
+            	DTDO.setOn_line_time(stopwatch.elapsed());
             	
             }
             // half black half white = 0.1
             else if (colorValue > SDO.getColorTresHold()){
                 // Send data to dataExchange
             	DEObj.setLineDetected(false);
+            	isBelowTreshold = false;
             }
-            System.out.println(SDO.getColorTresHold());
         }
     }
 

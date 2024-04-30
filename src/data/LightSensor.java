@@ -50,6 +50,7 @@ public class LightSensor implements Runnable {
             		isBelowTreshold = true;
             	}
             	DTDO.setOn_line_time(stopwatch.elapsed());
+            	System.out.println(DTDO.getOn_line_time());
             	
             }
             // half black half white = 0.1

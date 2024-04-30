@@ -13,9 +13,11 @@ import java.util.Map;
 public class DataReader implements Runnable{
 	
 	private SharedData SDO = new SharedData();
+	private DataExchange DEObj = new DataExchange();
 	
-	public DataReader(SharedData sd) {
+	public DataReader(SharedData sd, DataExchange de) {
 		SDO = sd;
+		DEObj = de;
 	}	
 	
 	public void run() {
@@ -33,7 +35,7 @@ public class DataReader implements Runnable{
 				url = new URL("http://192.168.1.11:8080/rest/lego/getvalues");
 				//url = new URL("http://192.168.1.187:8080/rest/lego/getvalues");
 				conn = (HttpURLConnection)url.openConnection();
-					System.out.println(conn.toString()); 
+				//System.out.println(conn.toString()); 
 				InputStream is=null;
 				try {
 					is=conn.getInputStream();
@@ -100,6 +102,10 @@ public class DataReader implements Runnable{
 	    String motorBPower = map.get("motorbpower");
 	    int powerIntB = Integer.parseInt(motorBPower);
 	    SDO.setMotorBValue(powerIntB);
+	    
+	    String manualModeStr = map.get("manualmode");
+        boolean manualMode = Boolean.parseBoolean(manualModeStr);
+        DEObj.setManualMode(manualMode);
 	    
 	    try {
             //Thread.sleep(1000); // Adjust as needed

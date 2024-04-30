@@ -18,13 +18,13 @@ public class DataToDatabase {
 		return on_line_time;
 	}
 
-	public void setOn_line_time(int on_line_time) {
-		int seconds = on_line_time/1000;
+	public void setOn_line_time(int line_time) {
+		int seconds = line_time/1000;
 		this.on_line_time += seconds;
 	}
 
 	public double getBattery_voltage() {
-		battery_voltage = Battery.getVoltage();
+		battery_voltage = Battery.getBatteryCurrent();
 		return battery_voltage;
 	}
 

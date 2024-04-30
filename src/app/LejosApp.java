@@ -56,7 +56,7 @@ public class LejosApp {
     	sd = new SharedData();
     	dtd = new DataToDatabase();
     	
-    	dr = new DataReader(sd);
+    	dr = new DataReader(sd, de);
     	ds = new DataSender(dtd);
     	
     	//urm = new Motors(de,100);

@@ -6,6 +6,7 @@ public class SharedData {
 	private volatile double colorTresHold;
 	private volatile int motorAValue;
 	private volatile int motorBValue;
+	private volatile double distanceTresHold;
 
     public synchronized void setColorTresHold(double data) {
         this.colorTresHold = data;
@@ -15,6 +16,13 @@ public class SharedData {
         return this.colorTresHold;
     }
 
+    public synchronized void setDistanceTresHold(double data) {
+        this.distanceTresHold = data;
+    }
+
+    public synchronized double getDistanceTresHold() {
+        return this.distanceTresHold;
+    }
 	public synchronized int getMotorAValue() {
 		return motorAValue;
 	}

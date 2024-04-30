@@ -14,13 +14,15 @@ public class ObstacleDetector implements Runnable {
 	private DataExchange DEObj = new DataExchange();
 	
 	private static EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S4);
+	private SharedData SDO = new SharedData();
 	/**
 	 * Constructor for the class
 	 * @param DE DataExchange object that is used for communication between components
 	 */
-	public ObstacleDetector(DataExchange DE) {
+	public ObstacleDetector(DataExchange DE, SharedData SD) {
 		// Setting up DataExchange object that is sent to this constructor as an argument
 		DEObj = DE;
+		SDO = SD;
 	}
 	
 	/**
@@ -33,7 +35,7 @@ public class ObstacleDetector implements Runnable {
 			//System.out.println(getDistance());
 			// Using getDistance()-method to get the distance value
 			// If distance to the object is under 7cm, send the information to DE
-			if (getDistance() < 7) {
+			if (getDistance() < SDO.getDistanceTresHold()) {
 				DEObj.setObstacleDetected(true);
 			}
 			// If distance to the object is over 7cm, send the information to DE

@@ -92,6 +92,10 @@ public class DataReader implements Runnable{
 	    double d = Double.parseDouble(colorvalue);
 	    SDO.setColorTresHold(d);
 	    
+	    String distancevalue = map.get("distancevalue");
+	    double d2 = Double.parseDouble(distancevalue);
+	    SDO.setColorTresHold(d2);
+	    
 	    String motorAPower = map.get("motorapower");
 	    int powerIntA = Integer.parseInt(motorAPower);
 	    SDO.setMotorAValue(powerIntA);

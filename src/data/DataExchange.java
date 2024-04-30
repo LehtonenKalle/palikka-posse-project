@@ -9,6 +9,7 @@ package data;
 public class DataExchange {
 	private boolean	obstacleDetected = false;
 	private boolean	lineDetected = false;
+	private boolean manualMode;
 	
 	/**
      * Constructs a new DataExchange object.
@@ -52,6 +53,15 @@ public class DataExchange {
 	public boolean getLineDetected() {
 		return lineDetected;
 	}
+
+	public boolean isManualMode() {
+		return manualMode;
+	}
+
+	public void setManualMode(boolean manualMode) {
+		this.manualMode = manualMode;
+	}
+	
 	
 	
 }

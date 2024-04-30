@@ -19,8 +19,8 @@ public class MotorsManual implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			System.out.println("MotorA value: " + sd.getMotorAValue());
-			System.out.println("MotorB value: " + sd.getMotorBValue());
+			//System.out.println("MotorA value: " + sd.getMotorAValue());
+			//System.out.println("MotorB value: " + sd.getMotorBValue());
 			motorA.setPower(sd.getMotorAValue());
 			motorB.setPower(sd.getMotorBValue());
 			

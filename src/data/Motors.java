@@ -53,6 +53,7 @@ public class Motors implements Runnable{
 	// Inside the Thread - Section
 	@Override
 	public void run() {
+		
 		motorA.setPower(sd.getMotorAValue());
 		motorB.setPower(sd.getMotorBValue());
 		System.out.println("MotorA value: " + sd.getMotorAValue());

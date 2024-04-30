@@ -62,7 +62,7 @@ public class LejosApp {
     	//urm = new Motors(de,100);
     	//urm = new Motors(de,100);
     	urm = new MotorsManual(de, sd);
-    	od = new ObstacleDetector(de);
+    	od = new ObstacleDetector(de, dtd);
     	ls = new LightSensor(de,sd,dtd);
     	sp = new SoundPlayer(de);
     	

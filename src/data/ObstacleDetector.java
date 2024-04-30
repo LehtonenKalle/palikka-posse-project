@@ -12,15 +12,17 @@ import lejos.utility.Delay;
 public class ObstacleDetector implements Runnable {
 	// Initializing DataExchange and EV3UltrasonicSensor
 	private DataExchange DEObj = new DataExchange();
+	private DataToDatabase DTD = new DataToDatabase();
 	
 	private static EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S4);
 	/**
 	 * Constructor for the class
 	 * @param DE DataExchange object that is used for communication between components
 	 */
-	public ObstacleDetector(DataExchange DE) {
+	public ObstacleDetector(DataExchange DE, DataToDatabase dtd) {
 		// Setting up DataExchange object that is sent to this constructor as an argument
 		DEObj = DE;
+		DTD = dtd;
 	}
 	
 	/**
@@ -30,6 +32,7 @@ public class ObstacleDetector implements Runnable {
 	public void run() {
 		// Looping 
 		while (true) {
+			DTD.setObstacle_distance(getDistance());
 			//System.out.println(getDistance());
 			// Using getDistance()-method to get the distance value
 			// If distance to the object is under 7cm, send the information to DE

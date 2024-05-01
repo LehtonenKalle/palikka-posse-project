@@ -32,8 +32,8 @@ public class ObstacleDetector implements Runnable {
 	public void run() {
 		// Looping 
 		while (true) {
-			DTD.setObstacle_distance(getDistance());
-			//System.out.println(getDistance());
+			// Setting current distance value in DTD object that is sent to server
+			DTD.setObstacle_distance(getDistance());			
 			// Using getDistance()-method to get the distance value
 			// If distance to the object is under 7cm, send the information to DE
 			if (getDistance() < 7) {

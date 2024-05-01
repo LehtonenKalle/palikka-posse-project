@@ -34,8 +34,7 @@ public class DataReader implements Runnable{
 			try {
 				url = new URL("http://192.168.1.11:8080/rest/lego/getvalues");
 				//url = new URL("http://192.168.1.187:8080/rest/lego/getvalues");
-				conn = (HttpURLConnection)url.openConnection();
-				//System.out.println(conn.toString()); 
+				conn = (HttpURLConnection)url.openConnection();				
 				InputStream is=null;
 				try {
 					is=conn.getInputStream();
@@ -108,7 +107,6 @@ public class DataReader implements Runnable{
         DEObj.setManualMode(manualMode);
 	    
 	    try {
-            //Thread.sleep(1000); // Adjust as needed
             Thread.sleep(50); // Adjust as needed
         } catch (InterruptedException e) {
             e.printStackTrace();

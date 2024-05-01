@@ -18,7 +18,7 @@ public class DataSender implements Runnable {
 	
 	public void run() {
 		try {
-            Thread.sleep(1000); // Wait for 5 seconds at start
+            Thread.sleep(1000); // Wait for 1 seconds at start
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -28,7 +28,6 @@ public class DataSender implements Runnable {
 			
 		
 	        try {
-	            //System.out.println("Sending data to server\n");
 	            String jsonData = convertToJson(DTD);
 	            // Create URL and connection
 	            URL url = new URL("http://192.168.1.11:8080/rest/lego/sendstatistics");

@@ -10,6 +10,7 @@ import lejos.hardware.Battery;
 public class DataToDatabase {
 	private volatile int on_line_time;
 	private volatile double battery_voltage;
+	private volatile int obstacle_distance;
 	
 	public DataToDatabase() {
 	}
@@ -19,8 +20,7 @@ public class DataToDatabase {
 	}
 
 	public void setOn_line_time(int line_time) {
-		int seconds = line_time/1000;
-		this.on_line_time += seconds;
+		this.on_line_time = line_time;
 	}
 
 	public double getBattery_voltage() {
@@ -30,6 +30,14 @@ public class DataToDatabase {
 
 	public void setBattery_voltage(double battery_voltage) {
 		this.battery_voltage = battery_voltage;
+	}
+
+	public int getObstacle_distance() {
+		return obstacle_distance;
+	}
+
+	public void setObstacle_distance(int obstacle_distance) {
+		this.obstacle_distance = obstacle_distance;
 	}
 	
 	

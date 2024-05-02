@@ -41,23 +41,26 @@ public class LightSensor implements Runnable {
         while (true) {
         	// Using getColor()-method to get the light value
             double colorValue = getColor();
-            
-            if (colorValue < SDO.getColorTresHold()) {
-                // Send data to dataExchange
-            	DEObj.setLineDetected(true);
+            if (colorValue < (SDO.getColorTresHold() + 0.02)) {
             	if(!isBelowTreshold) {
             		stopwatch.reset();
             		isBelowTreshold = true;
-            	}
-            	DTDO.setOn_line_time(stopwatch.elapsed());
-            	System.out.println(DTDO.getOn_line_time());
+            	} 
+            	//DTDO.setOn_line_time(stopwatch.elapsed());
+            	//System.out.println(DTDO.getOn_line_time());
+            } else if (colorValue > SDO.getColorTresHold() + 0.02) {
+            	isBelowTreshold = false;
+            }
+            if (colorValue < SDO.getColorTresHold()) {
+                // Send data to dataExchange
+            	DEObj.setLineDetected(true);
             	
             }
             // half black half white = 0.1
             else if (colorValue > SDO.getColorTresHold()){
                 // Send data to dataExchange
             	DEObj.setLineDetected(false);
-            	isBelowTreshold = false;
+
             }
             //System.out.println(SDO.getColorTresHold());
         }

@@ -24,6 +24,6 @@ public class SoundPlayer implements Runnable {
      * It plays a sound file.
      */
 	public void run() {
-		Sound.playSample(new File("Tokyo-Drift-22050Hz.wav"), 200);
+		Sound.playSample(new File("Tokyo-Drift.wav"), 0);
 	}
 }

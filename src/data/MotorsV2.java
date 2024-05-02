@@ -4,25 +4,28 @@ import lejos.hardware.Button;
 import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.utility.Delay;
+import lejos.utility.Stopwatch;
 
 public class MotorsV2 implements Runnable {
 	private DataExchange DEObj = new DataExchange();
     SharedData sd = new SharedData();
-    boolean obstacleAvoided = false;
+    DataToDatabase DTDO = new DataToDatabase();
     
     UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A); // LEFT
     UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.B); // RIGHT
 	
-	public MotorsV2(DataExchange de, SharedData sd) {
+	public MotorsV2(DataExchange de, SharedData sd, DataToDatabase DTDO) {
 		this.DEObj = de;
 		this.sd = sd;
+		this.DTDO = DTDO;
 	}
 	
 	public void run() {
+		Stopwatch stopwatch = new Stopwatch();
 		while (true) {
-			
-		
 			do {
+			
+				DTDO.setOn_line_time(stopwatch.elapsed());
 				//STOPPING SCENARIO.
 			    // Check if any button is pressed and released after start.
 			    if (Button.getButtons() != 0) {
@@ -37,7 +40,7 @@ public class MotorsV2 implements Runnable {
 			    }
 			    // LAP 1 SCENARIO.
 			    // Check if obstacle is detected (true) and obstacleAvoided flag is false.
-			    if (DEObj.getObstacleDetected() && obstacleAvoided == false) {
+			    if (DEObj.getObstacleDetected()) {
 			    	// 90 degrees turn.
 			    	
 		        	motorA.setPower(50); //LEFT
@@ -71,7 +74,6 @@ public class MotorsV2 implements Runnable {
 			        		motorA.setPower(50); //LEFT
 			        		motorB.setPower(-10); //RIGHT
 			        	} while (DEObj.getLineDetected());
-			        obstacleAvoided = true;
 			    }
 			    // These two codes (TRUE/FALSE) are for following the line. Basically the robot goes side to side like a lizard.
 			   	// WHEN LINE FLAG = TRUE , we do this action to get to the opposite direction.
@@ -88,14 +90,16 @@ public class MotorsV2 implements Runnable {
 				    motorB.setPower(50); //RIGHT    
 			    }
 		}while(DEObj.isManualMode() == false);
+			
 		do {
-			 
+				// Reset the watch when going to manual mode
+			 	stopwatch.reset();
 				//System.out.println("MotorA value: " + sd.getMotorAValue());
 				//System.out.println("MotorB value: " + sd.getMotorBValue());
 				motorA.setPower(sd.getMotorAValue());
 				motorB.setPower(sd.getMotorBValue());
 				
-				Delay.msDelay(1000);
+				Delay.msDelay(200);
 			
 		}while(DEObj.isManualMode() == true);
 		}

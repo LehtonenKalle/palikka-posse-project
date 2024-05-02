@@ -30,7 +30,7 @@ public class DataSender implements Runnable {
 	        try {
 	            String jsonData = convertToJson(DTD);
 	            // Create URL and connection
-	            URL url = new URL("http://192.168.1.11:8080/rest/lego/sendstatistics");
+	            URL url = new URL("http://192.168.1.187:8080/rest/lego/sendstatistics");
 	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	            conn.setRequestMethod("POST"); // Use POST method
 	            conn.setRequestProperty("Content-Type", "application/json");

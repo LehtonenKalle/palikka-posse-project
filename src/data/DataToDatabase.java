@@ -20,8 +20,7 @@ public class DataToDatabase {
 	}
 
 	public void setOn_line_time(int line_time) {
-		int seconds = line_time/1000;
-		this.on_line_time += seconds;
+		this.on_line_time = line_time;
 	}
 
 	public double getBattery_voltage() {

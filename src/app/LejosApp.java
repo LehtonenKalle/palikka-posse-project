@@ -66,7 +66,7 @@ public class LejosApp {
     	od = new ObstacleDetector(de, dtd);
     	ls = new LightSensor(de,sd,dtd);
     	sp = new SoundPlayer(de);
-    	mv2 = new MotorsV2(de, sd);
+    	mv2 = new MotorsV2(de, sd, dtd);
     	
     	Thread thread1 = new Thread(od);
     	

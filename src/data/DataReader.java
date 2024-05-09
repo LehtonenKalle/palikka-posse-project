@@ -9,17 +9,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
+/**
+ * The DataReader class retrieves data from a remote RESTful API endpoint.
+ * It parses the response and extracts specific key-value pairs, updating
+ * a shared data object accordingly.
+ * Implements the Runnable interface to enable execution in a separate thread.
+ */
 public class DataReader implements Runnable{
-	
+	/** The shared data object for storing the retrieved values. */
 	private SharedData SDO = new SharedData();
+	/** The data exchange object for communication between components. */
 	private DataExchange DEObj = new DataExchange();
-	
+    /**
+     * Constructs a DataReader object with the specified shared data and data exchange objects.
+     * @param sd The SharedData object to store the retrieved values.
+     * @param de The DataExchange object for communication.
+     */
 	public DataReader(SharedData sd, DataExchange de) {
 		SDO = sd;
 		DEObj = de;
 	}	
-	
+    /**
+     * Runs the data retrieval process in a separate thread.
+     * Continuously retrieves data from the specified RESTful API endpoint,
+     * parses the response, and updates the shared data object.
+     */
 	public void run() {
 		
 		
@@ -32,28 +46,27 @@ public class DataReader implements Runnable{
 
 			String s=null;
 			try {
+				// Open connection to the RESTful API endpoint
 				url = new URL("http://192.168.1.187:8080/rest/lego/getvalues");
-				//url = new URL("http://192.168.1.187:8080/rest/lego/getvalues");
 				conn = (HttpURLConnection)url.openConnection();				
 				InputStream is=null;
 				try {
 					is=conn.getInputStream();
 				}
 				catch (Exception e) {
+			// Handle connection error
 		  			System.out.println("Exception conn.getInputSteam()");
 		  			e.printStackTrace();
 		            System.out.println("Cannot get InputStream!");
 				}
 				isr = new InputStreamReader(is);
 		  		br=new BufferedReader(isr);
-		  		
+		  	// Read the response from the API endpoint
 		  		s=br.readLine();
 		  		
-	//			while ((s=br.readLine())!=null){
-	//				System.out.println(s);
-	//			}
 			}
 				catch(Exception e) {
+			// Handle general exceptions
 					e.printStackTrace();
 		        System.out.println("Some problem!");
 				}
